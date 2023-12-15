@@ -70,6 +70,17 @@ seg_digit2.off()
 seg_digit1.off()
 seg_digit0.off()
 sr_data.off()
+led_onboard.off()
+
+#show signs of life even if the 7-segment/shift register is not hooked up right
+led_onboard.on()
+sleep_ms(500)
+led_onboard.off()
+sleep_ms(500)
+led_onboard.on()
+sleep_ms(500)
+led_onboard.off()
+print("7 segment should say \"HEllo.\" now!")
 
 #demo: display "HEllo." on the 4-digit 7-segment display
 #we are essentially rapidly flashing each character on
@@ -77,33 +88,25 @@ sr_data.off()
 #human persistence of vision
 while True:
     shift_out(char_h)
-    led_onboard.on()
     seg_digit0.on()
     sleep_ms(4)
-    led_onboard.off()
     seg_digit0.off()
     sleep_us(10)
     
     shift_out(hex_e)
-    led_onboard.on()
     seg_digit1.on()
     sleep_ms(4)
-    led_onboard.off()
     seg_digit1.off()
     sleep_us(10)
     
     shift_out(char_ll)
-    led_onboard.on()
     seg_digit2.on()
     sleep_ms(4)
-    led_onboard.off()
     seg_digit2.off()
     sleep_us(10)
     
     shift_out(char_o | dp)
-    led_onboard.on()
     seg_digit3.on()
     sleep_ms(4)
-    led_onboard.off()
     seg_digit3.off()
     sleep_us(10)

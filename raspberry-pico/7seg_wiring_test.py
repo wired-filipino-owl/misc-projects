@@ -30,14 +30,14 @@ def shift_out(sout):
     for i in range(0, 8):
         sr_clk.off()
         sr_data.value((sout >> i) & 0x1)
-        sleep_ms(100)
+        sleep_ms(25)
         sr_clk.on()
-        sleep_ms(100)
+        sleep_ms(25)
     #clock one more times to propagate value
     sr_clk.off()
-    sleep_ms(100)
+    sleep_ms(25)
     sr_clk.on()
-    sleep_ms(100)
+    sleep_ms(25)
     sr_clk.off()
 
 #make sure our pins start out turned off
@@ -53,28 +53,28 @@ seg_digit3.off()
 while True:
     seg_digit0.on()
     shift_out(eight | dp)
-    sleep_ms(250)
+    sleep_ms(200)
     seg_digit0.off()
     
     shift_out(0)
     
     seg_digit1.on()
     shift_out(eight | dp)
-    sleep_ms(250)
+    sleep_ms(200)
     seg_digit1.off()
     
     shift_out(0)
     
     seg_digit2.on()
     shift_out(eight | dp)
-    sleep_ms(250)
+    sleep_ms(200)
     seg_digit2.off()
     
     shift_out(0)
     
     seg_digit3.on()
     shift_out(eight | dp)
-    sleep_ms(250)
+    sleep_ms(200)
     seg_digit3.off()
     
     shift_out(0)
