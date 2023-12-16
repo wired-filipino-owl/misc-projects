@@ -78,11 +78,11 @@ def BlinkTask():
     global count
     while True:
         count+=1
-        sleep_ms(35)
+        sleep_ms(500)
         led_onboard.on()
-        sleep_ms(35)
+        sleep_ms(500)
         led_onboard.off()
-        if count >= 0xffff:
+        if count >= 9999:
             count = 0
 
 #make sure our pins are all off before we start
@@ -128,6 +128,16 @@ def hello_demo():
     sleep_ms(4)
     seg_digit3.off()
     sleep_us(10)
+    
+def hello_scroll():
+    for i in range(0, 32):
+        disp_7seg_raw(char_h)
+    for i in range(0, 32):
+        disp_7seg_raw((char_h << 8) | hex_e)
+    for i in range(0, 32):
+        disp_7seg_raw((char_h << 16) | (hex_e << 8) | char_ll)
+    for i in range(0, 32):
+        disp_7seg_raw((char_h << 24) | (hex_e << 16) | (char_ll << 8) | char_o | dp)
 
 def disp_7seg(val):
     shift_out(chars[(int)(val / 1000)])
@@ -179,6 +189,36 @@ def disp_7seg_hex(val):
     seg_digit3.off()
     sleep_us(10)
     
+def disp_7seg_raw(val):
+    shift_out(val>>24)
+    seg_digit0.on()
+    sleep_ms(4)
+    seg_digit0.off()
+    sleep_us(10)
+    
+    shift_out((val & 0x00FF0000) >> 16)
+    seg_digit1.on()
+    sleep_ms(4)
+    seg_digit1.off()
+    sleep_us(10)
+    
+    shift_out((val & 0x0000FF00) >> 8)
+    seg_digit2.on()
+    sleep_ms(4)
+    seg_digit2.off()
+    sleep_us(10)
+    
+    shift_out(val & 0x000000FF)
+    seg_digit3.on()
+    sleep_ms(4)
+    seg_digit3.off()
+    sleep_us(10)
+    
 while True:
     global count
-    disp_7seg_hex(count)
+    #disp_7seg(count)
+    for i in range(0, 64):
+        disp_7seg(count)
+    hello_scroll()
+    
+
