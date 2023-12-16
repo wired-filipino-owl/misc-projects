@@ -82,7 +82,7 @@ def BlinkTask():
         led_onboard.on()
         sleep_ms(35)
         led_onboard.off()
-        if count >= 9999:
+        if count >= 0xffff:
             count = 0
 
 #make sure our pins are all off before we start
@@ -181,4 +181,4 @@ def disp_7seg_hex(val):
     
 while True:
     global count
-    disp_7seg(count)
+    disp_7seg_hex(count)
